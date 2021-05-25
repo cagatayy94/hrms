@@ -5,7 +5,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import spring.hrms.business.abstracts.PositionsService;
-import spring.hrms.entities.concretes.Positions;
+import spring.hrms.core.utilities.results.*;
+import spring.hrms.entities.concretes.*;
 
 import java.util.List;
 
@@ -21,7 +22,7 @@ public class PositionsController {
     }
 
     @GetMapping("/getAll")
-    public List<Positions> getAll(){
+    public DataResult<List<Positions>> getAll(){
         return this.positionsService.getAll();
     }
 }

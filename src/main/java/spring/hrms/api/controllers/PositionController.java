@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import spring.hrms.business.abstracts.PositionsService;
+import spring.hrms.business.abstracts.PositionService;
 import spring.hrms.core.utilities.results.*;
 import spring.hrms.entities.concretes.*;
 
@@ -12,17 +12,17 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/positions")
-public class PositionsController {
+public class PositionController {
 
-    private PositionsService positionsService;
+    private PositionService positionService;
 
     @Autowired
-    public PositionsController(PositionsService positionsService){
-        this.positionsService = positionsService;
+    public PositionController(PositionService positionService){
+        this.positionService = positionService;
     }
 
     @GetMapping("/getAll")
-    public DataResult<List<Positions>> getAll(){
-        return this.positionsService.getAll();
+    public DataResult<List<Position>> getAll(){
+        return this.positionService.getAll();
     }
 }

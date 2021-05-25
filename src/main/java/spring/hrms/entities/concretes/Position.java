@@ -7,7 +7,7 @@ import javax.persistence.*;
 @Data
 @Entity
 @Table(name = "positions")
-public class Positions {
+public class Position {
 
     @Id
     @Column(name = "id")

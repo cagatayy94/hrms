@@ -15,6 +15,7 @@ public class SwaggerConfig {
     @Bean
     public Docket docket(){
         return new Docket(DocumentationType.SWAGGER_2).select()
-                .apis(Predicates.not(RequestHandlerSelectors.basePackage("org.springframework.boot"))).build();
+                .apis(RequestHandlerSelectors.basePackage("spring.hrms"))
+                .build();
     }
 }

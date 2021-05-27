@@ -1,14 +1,12 @@
 package spring.hrms.entities.concretes;
 
-import lombok.Data;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import lombok.*;
+import javax.persistence.*;
 
 @Data
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "employer")
 public class Employer {
 

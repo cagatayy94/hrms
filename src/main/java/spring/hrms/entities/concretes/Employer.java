@@ -22,4 +22,9 @@ public class Employer {
 
     @Column(name = "mobile")
     private String mobile;
+
+    @OneToOne
+    @MapsId
+    @JoinColumn(name = "user_id")
+    private User user;
 }

@@ -23,4 +23,13 @@ public class User {
 
     @Column(name = "email_approved")
     private boolean email_approved;
+
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    @PrimaryKeyJoinColumn
+    private Employee employee;
+
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    @PrimaryKeyJoinColumn
+    private Employer employer;
+
 }

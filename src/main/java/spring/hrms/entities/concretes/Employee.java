@@ -25,4 +25,9 @@ public class Employee{
 
     @Column(name = "birthday")
     private String birthday;
+
+    @OneToOne
+    @MapsId
+    @JoinColumn(name = "user_id")
+    private User user;
 }

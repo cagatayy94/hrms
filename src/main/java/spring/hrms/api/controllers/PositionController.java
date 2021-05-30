@@ -9,7 +9,7 @@ import spring.hrms.entities.concretes.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/positions")
+@RequestMapping("/api/positions/")
 public class PositionController {
 
     private final PositionService positionService;
@@ -19,12 +19,12 @@ public class PositionController {
         this.positionService = positionService;
     }
 
-    @GetMapping("/getAll")
+    @GetMapping("getAll")
     public DataResult<List<Position>> getAll(){
         return this.positionService.getAll();
     }
 
-    @PostMapping("/add")
+    @PostMapping("add")
     public Result add(@RequestBody Position position){
         return this.positionService.add(position);
     }

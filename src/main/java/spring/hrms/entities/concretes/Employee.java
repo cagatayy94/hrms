@@ -9,6 +9,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "employee")
+@PrimaryKeyJoinColumn(name = "user_id")
 public class Employee extends User{
 
     @Column(name = "identification_number")

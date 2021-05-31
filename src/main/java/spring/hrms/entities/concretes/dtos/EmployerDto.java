@@ -9,9 +9,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class EmployerDto {
     private String email;
-    private boolean email_approved;
-    private String company_name;
-    private String web_site;
+    private boolean emailApproved;
+    private String companyName;
+    private String website;
     private String mobile;
     private boolean employerApproved;
 }

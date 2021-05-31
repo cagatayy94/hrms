@@ -12,10 +12,10 @@ import javax.persistence.*;
 public class Employer extends User{
 
     @Column(name = "company_name")
-    private String company_name;
+    private String companyName;
 
     @Column(name = "web_site")
-    private String web_site;
+    private String webSite;
 
     @Column(name = "mobile")
     private String mobile;

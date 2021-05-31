@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import spring.hrms.business.abstracts.EmployeeService;
 import spring.hrms.core.utilities.results.DataResult;
+import spring.hrms.core.utilities.results.SuccessDataResult;
 import spring.hrms.entities.concretes.Employee;
-import spring.hrms.entities.concretes.Position;
 
 import java.util.List;
 
@@ -23,6 +23,6 @@ public class EmployeeController {
 
     @GetMapping("getAll")
     public DataResult<List<Employee>> getAll(){
-        return this.employeeService.getAll();
+        return new SuccessDataResult<>(this.employeeService.getAll());
     }
 }

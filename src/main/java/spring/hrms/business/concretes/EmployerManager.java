@@ -5,9 +5,6 @@ import org.springframework.stereotype.Service;
 import spring.hrms.business.abstracts.EmployerService;
 import spring.hrms.dataAccess.abstracts.EmployerDao;
 import spring.hrms.entities.concretes.Employer;
-import spring.hrms.entities.concretes.dtos.EmployerDto;
-
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -22,21 +19,7 @@ public class EmployerManager implements EmployerService {
 
 
     @Override
-    public List<EmployerDto> getAll() {
-        List<Employer> employers = this.employerDao.findAll();
-        List<EmployerDto> employersDtos = new ArrayList<>();
-        employers.forEach(item -> {
-            EmployerDto employerDto = new EmployerDto();
-            employerDto.setEmail(item.getEmail());
-            employerDto.setCompany_name(item.getCompany_name());
-            employerDto.setEmail_approved(item.isEmail_approved());
-            employerDto.setMobile(item.getMobile());
-            employerDto.setEmployerApproved(item.isEmployerApproved());
-            employerDto.setWeb_site(item.getWeb_site());
-            employerDto.setCompany_name(item.getCompany_name());
-            employersDtos.add(employerDto);
-        });
-
-        return employersDtos;
+    public List<Employer> getAll() {
+        return employerDao.findAll();
     }
 }

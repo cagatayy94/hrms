@@ -3,6 +3,7 @@ package spring.hrms.entities.concretes;
 import lombok.*;
 import javax.persistence.*;
 
+@EqualsAndHashCode(callSuper = true)
 @Data
 @Entity
 @AllArgsConstructor
@@ -11,7 +12,7 @@ import javax.persistence.*;
 public class Employee extends User{
 
     @Column(name = "identification_number")
-    private String identification_number;
+    private String identificationNumber;
 
     @Column(name = "name")
     private String name;

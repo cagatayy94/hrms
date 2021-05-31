@@ -23,5 +23,5 @@ public class User {
     private String password;
 
     @Column(name = "email_approved")
-    private boolean email_approved;
+    private boolean emailApproved;
 }

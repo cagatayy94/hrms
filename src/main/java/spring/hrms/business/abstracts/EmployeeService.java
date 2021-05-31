@@ -6,5 +6,5 @@ import spring.hrms.entities.concretes.Employee;
 import java.util.List;
 
 public interface EmployeeService {
-    DataResult<List<Employee>> getAll();
+    List<Employee> getAll();
 }

@@ -21,7 +21,7 @@ public class EmployeeManager implements EmployeeService {
     }
 
     @Override
-    public DataResult<List<Employee>> getAll() {
-        return new SuccessDataResult<List<Employee>>(employeeDao.findAll());
+    public List<Employee> getAll() {
+        return employeeDao.findAll();
     }
 }

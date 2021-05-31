@@ -8,5 +8,5 @@ import spring.hrms.entities.concretes.dtos.EmployerDto;
 import java.util.List;
 
 public interface EmployerService {
-    List<EmployerDto> getAll();
+    List<Employer> getAll();
 }

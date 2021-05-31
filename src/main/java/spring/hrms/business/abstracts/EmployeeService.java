@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface EmployeeService {
     List<Employee> getAll();
+    void add(Employee employee);
+    boolean employeeExist(String email);
 }

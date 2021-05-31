@@ -1,12 +1,15 @@
 package spring.hrms.api.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import spring.hrms.business.abstracts.EmployerService;
 import spring.hrms.core.utilities.results.DataResult;
+import spring.hrms.core.utilities.results.Result;
+import spring.hrms.core.utilities.results.SuccessDataResult;
+import spring.hrms.core.utilities.results.SuccessResult;
 import spring.hrms.entities.concretes.Employer;
+import spring.hrms.entities.concretes.dtos.EmployerDto;
+
 import java.util.List;
 
 @RestController
@@ -20,7 +23,7 @@ public class EmployerController {
     }
 
     @GetMapping("getAll")
-    public DataResult<List<Employer>> getAll(){
-        return this.employerService.getAll();
+    public DataResult<List<EmployerDto>> getAll(){
+        return new SuccessDataResult<List<EmployerDto>>(this.employerService.getAll());
     }
 }

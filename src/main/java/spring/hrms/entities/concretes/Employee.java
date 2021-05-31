@@ -8,11 +8,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "employee")
-public class Employee{
-
-    @Id
-    @Column(name="user_id")
-    private int user_id;
+public class Employee extends User{
 
     @Column(name = "identification_number")
     private String identification_number;
@@ -25,9 +21,4 @@ public class Employee{
 
     @Column(name = "birthday")
     private String birthday;
-
-    @OneToOne
-    @MapsId
-    @JoinColumn(name = "user_id")
-    private User user;
 }

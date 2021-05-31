@@ -31,6 +31,30 @@ public class EmployeeController {
     @PostMapping("add")
     public Result add(@RequestBody EmployeeDto employeeDto){
 
+        if (employeeDto.getBirthday() == null || employeeDto.getEmail().isBlank()){
+            return new ErrorResult("Email required");
+        }
+
+        if (employeeDto.getBirthday() == null || employeeDto.getBirthday().isBlank()){
+            return new ErrorResult("Birthday required");
+        }
+
+        if (employeeDto.getName() == null || employeeDto.getName().isEmpty()){
+            return new ErrorResult("Name required");
+        }
+
+        if (employeeDto.getSurname() == null || employeeDto.getSurname().isEmpty()){
+            return new ErrorResult("Surname required");
+        }
+
+        if (employeeDto.getIdentificationNumber() == null || employeeDto.getIdentificationNumber().isEmpty()){
+            return new ErrorResult("Identification number required");
+        }
+
+        if (employeeDto.getPassword() == null || employeeDto.getPasswordRepeat() == null || employeeDto.getPassword().isEmpty() || employeeDto.getPasswordRepeat().isEmpty()){
+            return new ErrorResult("Password required");
+        }
+
         boolean passwordsMatch = employeeDto.getPassword().equals(employeeDto.getPasswordRepeat());
         if (!passwordsMatch){
             return new ErrorResult("Passwords not match");

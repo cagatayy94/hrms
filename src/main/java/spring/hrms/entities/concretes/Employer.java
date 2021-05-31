@@ -23,6 +23,9 @@ public class Employer {
     @Column(name = "mobile")
     private String mobile;
 
+    @Column(name = "employer_approved")
+    private boolean employerApproved;
+
     @OneToOne
     @MapsId
     @JoinColumn(name = "user_id")

@@ -26,6 +26,14 @@ public class PositionController {
 
     @PostMapping("add")
     public Result add(@RequestBody Position position){
-        return this.positionService.add(position);
+        boolean positionExist =  this.positionService.positionExist(position);
+
+        if (positionExist){
+            return new ErrorResult("Position already exist");
+        }
+
+        this.positionService.add(position);
+
+        return new SuccessResult();
     }
 }

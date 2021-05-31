@@ -25,14 +25,12 @@ public class PositionManager implements PositionService {
     }
 
     @Override
-    public Result add(Position position) {
-        List<Position> positionExist =  this.positionDao.findByName(position.getName());
+    public void add(Position position) {
+        this.positionDao.save(position);
+    }
 
-        if (!positionExist.isEmpty()){
-            return new ErrorResult("There is another position with this name.");
-        }else{
-            this.positionDao.save(position);
-            return new SuccessResult("Position created successfully.");
-        }
+    public boolean positionExist(Position position){
+        List<Position> positionExist =  this.positionDao.findByName(position.getName());
+        return !positionExist.isEmpty();
     }
 }

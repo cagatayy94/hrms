@@ -7,5 +7,6 @@ import java.util.List;
 
 public interface PositionService {
     DataResult<List<Position>> getAll();
-    Result add(Position position);
+    void add(Position position);
+    boolean positionExist(Position position);
 }

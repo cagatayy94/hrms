@@ -3,6 +3,7 @@ package spring.hrms.entities.concretes;
 import lombok.*;
 import javax.persistence.*;
 
+@EqualsAndHashCode(callSuper = true)
 @Data
 @Entity
 @AllArgsConstructor

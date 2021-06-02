@@ -20,7 +20,7 @@ public class JobBoardManager implements JobBoardService {
 
     @Override
     public List<JobBoard> getAll() {
-        return jobBoardDao.findAll();
+        return jobBoardDao.getJobBoardByActiveTrue();
     }
 
     @Override

@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface PositionDao extends JpaRepository<Position, Integer> {
     List<Position> findByName(String name);
+    Position getPositionById(int positionId);
 }

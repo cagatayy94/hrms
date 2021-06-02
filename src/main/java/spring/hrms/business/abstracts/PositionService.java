@@ -9,4 +9,5 @@ public interface PositionService {
     DataResult<List<Position>> getAll();
     void add(Position position);
     boolean positionExist(Position position);
+    Position getPositionById(int positionId);
 }

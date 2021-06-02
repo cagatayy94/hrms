@@ -32,7 +32,11 @@ public class EmployerManager implements EmployerService {
     @Override
     public boolean employerExist(String employerEmail) {
         List<Employer> employerExist =  this.employerDao.findByEmail(employerEmail);
-
         return !employerExist.isEmpty();
+    }
+
+    @Override
+    public Employer getEmployerById(int employerId) {
+        return this.employerDao.getEmployerById(employerId);
     }
 }

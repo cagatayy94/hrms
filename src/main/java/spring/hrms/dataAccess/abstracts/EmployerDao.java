@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface EmployerDao extends JpaRepository<Employer, Integer> {
     List<Employer> findByEmail(String email);
+    Employer getEmployerById(int employerId);
 }

@@ -11,4 +11,5 @@ public interface EmployerService {
     List<Employer> getAll();
     void add(Employer employer);
     boolean employerExist(String employerEmail);
+    Employer getEmployerById(int employerId);
 }

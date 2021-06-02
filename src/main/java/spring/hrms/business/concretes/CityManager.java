@@ -17,6 +17,11 @@ public class CityManager implements CityService {
 
     @Override
     public List<City> getAll() {
-        return cityDao.findAll();
+        return this.cityDao.findAll();
+    }
+
+    @Override
+    public City getCityById(int cityId) {
+        return this.cityDao.getCityById(cityId);
     }
 }

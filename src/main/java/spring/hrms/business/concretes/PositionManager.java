@@ -33,4 +33,9 @@ public class PositionManager implements PositionService {
         List<Position> positionExist =  this.positionDao.findByName(position.getName());
         return !positionExist.isEmpty();
     }
+
+    @Override
+    public Position getPositionById(int positionId) {
+        return this.positionDao.getPositionById(positionId);
+    }
 }

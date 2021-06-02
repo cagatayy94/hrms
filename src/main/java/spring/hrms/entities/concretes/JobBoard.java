@@ -1,6 +1,7 @@
 package spring.hrms.entities.concretes;
 
 import lombok.Data;
+import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -12,6 +13,7 @@ public class JobBoard {
 
     @Id
     @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     //@Column(name="position_id")
@@ -53,6 +55,7 @@ public class JobBoard {
     @JoinColumn(name = "employer_id")
     private Employer employer;
 
-    @Column(name = "created_at")
+    @CreationTimestamp
+    @Column(name = "created_at", columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private Date createdAt;
 }

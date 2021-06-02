@@ -57,4 +57,10 @@ public class JobBoardController {
         this.jobBoardService.add(jobBoard);
         return new SuccessResult();
     }
+
+    @PostMapping("disable")
+    public Result disable(@RequestParam int jobBoardId){
+        this.jobBoardService.disable(jobBoardId);
+        return new SuccessResult();
+    }
 }

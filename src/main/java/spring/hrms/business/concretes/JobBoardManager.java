@@ -27,4 +27,11 @@ public class JobBoardManager implements JobBoardService {
     public void add(JobBoard jobBoard) {
         this.jobBoardDao.save(jobBoard);
     }
+
+    @Override
+    public void disable(int jobBoardId) {
+        JobBoard jobBoard = this.jobBoardDao.getJobBoardById(jobBoardId);
+        jobBoard.setActive(false);
+        this.jobBoardDao.save(jobBoard);
+    }
 }

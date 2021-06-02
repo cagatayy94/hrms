@@ -8,4 +8,5 @@ import java.util.List;
 public interface JobBoardService {
     List<JobBoard> getAll();
     void add(JobBoard jobBoard);
+    void disable(int jobBoardId);
 }

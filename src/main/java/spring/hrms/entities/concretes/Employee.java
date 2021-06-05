@@ -46,6 +46,6 @@ public class Employee extends User{
     @OneToMany(mappedBy = "employee")
     private List<Language> languages;
 
-    @OneToMany
+    @OneToMany(mappedBy = "employee")
     private List<School> schools;
 }

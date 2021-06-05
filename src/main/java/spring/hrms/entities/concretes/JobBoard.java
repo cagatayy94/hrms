@@ -1,6 +1,8 @@
 package spring.hrms.entities.concretes;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
@@ -9,6 +11,8 @@ import java.util.Date;
 @Data
 @Entity
 @Table(name = "job_board")
+@AllArgsConstructor
+@NoArgsConstructor
 public class JobBoard {
 
     @Id

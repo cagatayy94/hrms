@@ -2,6 +2,7 @@ package spring.hrms.entities.concretes;
 
 import lombok.*;
 import javax.persistence.*;
+import java.util.List;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
@@ -35,4 +36,16 @@ public class Employee extends User{
 
     @Column(name = "profile_pic")
     private String profilePic;
+
+    @OneToMany(mappedBy="employee")
+    private List<Skill> skills;
+
+    @OneToMany(mappedBy = "employee")
+    private List<Experience> experiences;
+
+    @OneToMany(mappedBy = "employee")
+    private List<Language> languages;
+
+    @OneToMany
+    private List<School> schools;
 }

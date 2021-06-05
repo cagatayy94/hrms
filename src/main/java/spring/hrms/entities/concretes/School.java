@@ -1,5 +1,6 @@
 package spring.hrms.entities.concretes;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,6 +14,7 @@ import javax.validation.constraints.NotNull;
 @Table(name = "schools")
 @AllArgsConstructor
 @NoArgsConstructor
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "employee"})
 public class School {
 
     @Id
@@ -37,7 +39,11 @@ public class School {
     @Column(name = "end_year")
     private int endYear;
 
-    @NotNull
-    @Column(name = "user_id")
-    private int userId;
+    //@NotNull
+    //@Column(name = "user_id")
+    //private int userId;
+
+    @ManyToOne
+    @JoinColumn(name="user_id", nullable=false)
+    private Employee employee;
 }

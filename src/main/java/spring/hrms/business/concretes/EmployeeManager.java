@@ -34,4 +34,9 @@ public class EmployeeManager implements EmployeeService {
 
         return !employeeExist.isEmpty();
     }
+
+    @Override
+    public Employee getEmployeeById(int id) {
+        return this.employeeDao.getEmployeeById(id);
+    }
 }

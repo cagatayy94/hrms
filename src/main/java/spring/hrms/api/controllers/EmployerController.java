@@ -1,13 +1,21 @@
 package spring.hrms.api.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 import spring.hrms.business.abstracts.EmployerService;
 import spring.hrms.core.utilities.results.*;
 import spring.hrms.entities.concretes.Employer;
 import spring.hrms.entities.concretes.dtos.EmployerDto;
+
+import javax.validation.Valid;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -27,30 +35,10 @@ public class EmployerController {
     }
 
     @PostMapping("add")
-    public Result add(@RequestBody EmployerDto employerDto){
-
-        if (employerDto.getEmail() == null || employerDto.getEmail().isBlank()){
-            return new ErrorResult("Email required");
-        }
-
-        if (employerDto.getPasswordRepeat() == null || employerDto.getPassword() == null || employerDto.getPassword().isBlank() || employerDto.getPassword().isBlank()){
-            return new ErrorResult("Password required");
-        }
+    public ResponseEntity<?> add(@Valid @RequestBody EmployerDto employerDto){
 
         if (!employerDto.getPassword().equals(employerDto.getPasswordRepeat())){
-            return new ErrorResult("Passwords not match");
-        }
-
-        if (employerDto.getMobile() == null || employerDto.getMobile().isBlank()){
-            return new ErrorResult("Mobile required");
-        }
-
-        if (employerDto.getWebsite() == null ||employerDto.getWebsite().isBlank()){
-            return new ErrorResult("Website required");
-        }
-
-        if (employerDto.getCompanyName() == null || employerDto.getCompanyName().isBlank()){
-            return new ErrorResult("Company name required");
+            return ResponseEntity.ok(new ErrorResult("Passwords not match"));
         }
 
         String[] webSiteParts = employerDto.getWebsite().split("\\.");
@@ -65,13 +53,13 @@ public class EmployerController {
         }
 
         if (!emailDomain.equals(webSiteDomain)){
-            return new ErrorResult("Email and website domains not match");
+            return ResponseEntity.ok(new ErrorResult("Email and website domains not match"));
         }
 
         boolean employerExist = this.employerService.employerExist(employerDto.getEmail());
 
         if (employerExist){
-            return new ErrorResult("There is another record with this email");
+            return ResponseEntity.ok(new ErrorResult("There is another record with this email"));
         }
 
 
@@ -85,6 +73,18 @@ public class EmployerController {
 
         this.employerService.add(employer);
 
-        return new SuccessResult();
+        return ResponseEntity.ok(new SuccessResult());
+    }
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ErrorDataResult<Object> handleValidationException(MethodArgumentNotValidException exceptions){
+        Map<String, String> validationErrors = new HashMap<String, String>();
+        for (FieldError fieldError : exceptions.getBindingResult().getFieldErrors()){
+            validationErrors.put(fieldError.getField(), fieldError.getDefaultMessage());
+        }
+
+        ErrorDataResult<Object> errors = new ErrorDataResult<>(validationErrors, "Doğrulama Hataları");
+        return errors;
     }
 }

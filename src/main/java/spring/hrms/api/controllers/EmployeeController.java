@@ -1,7 +1,11 @@
 package spring.hrms.api.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 import spring.hrms.business.abstracts.EmployeeService;
 import spring.hrms.business.abstracts.MernisService;
@@ -9,7 +13,10 @@ import spring.hrms.core.utilities.results.*;
 import spring.hrms.entities.concretes.Employee;
 import spring.hrms.entities.concretes.dtos.EmployeeDto;
 
+import javax.validation.Valid;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/employees/")
@@ -29,45 +36,21 @@ public class EmployeeController {
     }
 
     @PostMapping("add")
-    public Result add(@RequestBody EmployeeDto employeeDto){
-
-        if (employeeDto.getBirthday() == null || employeeDto.getEmail().isBlank()){
-            return new ErrorResult("Email required");
-        }
-
-        if (employeeDto.getBirthday() == null || employeeDto.getBirthday().isBlank()){
-            return new ErrorResult("Birthday required");
-        }
-
-        if (employeeDto.getName() == null || employeeDto.getName().isEmpty()){
-            return new ErrorResult("Name required");
-        }
-
-        if (employeeDto.getSurname() == null || employeeDto.getSurname().isEmpty()){
-            return new ErrorResult("Surname required");
-        }
-
-        if (employeeDto.getIdentificationNumber() == null || employeeDto.getIdentificationNumber().isEmpty()){
-            return new ErrorResult("Identification number required");
-        }
-
-        if (employeeDto.getPassword() == null || employeeDto.getPasswordRepeat() == null || employeeDto.getPassword().isEmpty() || employeeDto.getPasswordRepeat().isEmpty()){
-            return new ErrorResult("Password required");
-        }
+    public ResponseEntity<?> add(@Valid @RequestBody EmployeeDto employeeDto){
 
         boolean passwordsMatch = employeeDto.getPassword().equals(employeeDto.getPasswordRepeat());
         if (!passwordsMatch){
-            return new ErrorResult("Passwords not match");
+            return ResponseEntity.ok(new ErrorResult("Passwords not match"));
         }
 
         boolean employeeExist = this.employeeService.employeeExist(employeeDto.getEmail());
         if (employeeExist){
-            return new ErrorResult("Employee already exist");
+            return ResponseEntity.ok(new ErrorResult("Employee already exist"));
         }
 
         boolean employeeValid = this.mernisService.validateUser(employeeDto.getIdentificationNumber());
         if (!employeeValid){
-            return new ErrorResult("Identification number not valid");
+            return ResponseEntity.ok(new ErrorResult("Identification number not valid"));
         }
 
         Employee employee = new Employee();
@@ -82,6 +65,18 @@ public class EmployeeController {
 
         employeeService.add(employee);
 
-        return new SuccessResult();
+        return ResponseEntity.ok(new SuccessResult());
+    }
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ErrorDataResult<Object> handleValidationException(MethodArgumentNotValidException exceptions){
+        Map<String, String> validationErrors = new HashMap<String, String>();
+        for (FieldError fieldError : exceptions.getBindingResult().getFieldErrors()){
+            validationErrors.put(fieldError.getField(), fieldError.getDefaultMessage());
+        }
+
+        ErrorDataResult<Object> errors = new ErrorDataResult<>(validationErrors, "Doğrulama Hataları");
+        return errors;
     }
 }

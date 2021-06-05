@@ -14,6 +14,7 @@ import spring.hrms.entities.concretes.Employer;
 import spring.hrms.entities.concretes.JobBoard;
 import spring.hrms.entities.concretes.Position;
 import spring.hrms.entities.concretes.dtos.JobBoardDto;
+import spring.hrms.entities.concretes.dtos.JobBoardListDto;
 
 import java.util.List;
 
@@ -35,6 +36,11 @@ public class JobBoardController {
     @GetMapping("getAll")
     public DataResult<List<JobBoard>>getAll(){
         return new SuccessDataResult<>(this.jobBoardService.getAll());
+    }
+
+    @GetMapping("getAllWithDto")
+    public DataResult<List<JobBoardListDto>>getAllWithDto(){
+        return new SuccessDataResult<>(this.jobBoardService.getAllWithDto());
     }
 
     @PostMapping("add")

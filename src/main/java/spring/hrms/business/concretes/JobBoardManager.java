@@ -6,6 +6,7 @@ import spring.hrms.dataAccess.abstracts.CityDao;
 import spring.hrms.dataAccess.abstracts.JobBoardDao;
 import spring.hrms.entities.concretes.City;
 import spring.hrms.entities.concretes.JobBoard;
+import spring.hrms.entities.concretes.dtos.JobBoardListDto;
 
 import java.util.List;
 
@@ -21,6 +22,11 @@ public class JobBoardManager implements JobBoardService {
     @Override
     public List<JobBoard> getAll() {
         return jobBoardDao.getJobBoardByActiveTrue();
+    }
+
+    @Override
+    public List<JobBoardListDto> getAllWithDto() {
+        return this.jobBoardDao.getJobBoardsByListDto();
     }
 
     @Override

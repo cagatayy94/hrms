@@ -23,4 +23,16 @@ public class Employee extends User{
 
     @Column(name = "birthday")
     private String birthday;
+
+    @Column(name = "cover_letter")
+    private String coverLetter;
+
+    @Column(name = "github")
+    private String github;
+
+    @Column(name = "linkedin")
+    private String linkedin;
+
+    @Column(name = "profile_pic")
+    private String profilePic;
 }

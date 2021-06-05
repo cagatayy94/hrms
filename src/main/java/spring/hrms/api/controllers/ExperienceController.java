@@ -1,0 +1,44 @@
+package spring.hrms.api.controllers;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.annotation.*;
+import spring.hrms.business.abstracts.ExperienceService;
+import spring.hrms.core.utilities.results.ErrorDataResult;
+import spring.hrms.core.utilities.results.SuccessResult;
+import spring.hrms.entities.concretes.Experience;
+
+import javax.validation.Valid;
+import java.util.HashMap;
+import java.util.Map;
+
+@RestController
+@RequestMapping("/api/experience/")
+public class ExperienceController {
+    private final ExperienceService experienceService;
+
+    @Autowired
+    public ExperienceController(ExperienceService experienceService) {
+        this.experienceService = experienceService;
+    }
+
+    @PostMapping("add")
+    public ResponseEntity<?> add(@Valid @RequestBody Experience experience){
+        this.experienceService.add(experience);
+        return ResponseEntity.ok(new SuccessResult("added"));
+    }
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ErrorDataResult<Object> handleValidationException(MethodArgumentNotValidException exceptions){
+        Map<String, String> validationErrors = new HashMap<String, String>();
+        for (FieldError fieldError : exceptions.getBindingResult().getFieldErrors()){
+            validationErrors.put(fieldError.getField(), fieldError.getDefaultMessage());
+        }
+
+        return new ErrorDataResult<>(validationErrors, "Doğrulama Hataları");
+    }
+}

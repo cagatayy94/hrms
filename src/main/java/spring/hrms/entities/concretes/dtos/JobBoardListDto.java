@@ -11,6 +11,7 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 public class JobBoardListDto {
+    private int id;
     private String employerName;
     private String positionName;
     private int openPositions;

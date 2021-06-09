@@ -13,7 +13,7 @@ public interface JobBoardDao extends JpaRepository<JobBoard, Integer> {
     List<JobBoard> getJobBoardByActiveTrue();
 
     @Query("Select new spring.hrms.entities.concretes.dtos.JobBoardListDto" +
-            "(jb.employer.companyName, jb.position.name, jb.openPositions, jb.createdAt, jb.dueDate)" +
+            "(jb.id,jb.employer.companyName, jb.position.name, jb.openPositions, jb.createdAt, jb.dueDate)" +
             " From JobBoard jb")
     List<JobBoardListDto> getJobBoardsByListDto();
 }

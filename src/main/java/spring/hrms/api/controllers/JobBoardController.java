@@ -18,6 +18,7 @@ import spring.hrms.entities.concretes.dtos.JobBoardListDto;
 
 import java.util.List;
 
+@CrossOrigin
 @RestController
 @RequestMapping("api/jobBoard/")
 public class JobBoardController {
